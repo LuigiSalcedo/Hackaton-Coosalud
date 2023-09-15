@@ -1,4 +1,4 @@
-package com.coosalud.hackaton.portal.infra;
+package com.coosalud.hackaton.portal.infra.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

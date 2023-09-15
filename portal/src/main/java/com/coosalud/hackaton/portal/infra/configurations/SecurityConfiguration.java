@@ -1,4 +1,4 @@
-package com.coosalud.hackaton.portal.infra;
+package com.coosalud.hackaton.portal.infra.configurations;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
