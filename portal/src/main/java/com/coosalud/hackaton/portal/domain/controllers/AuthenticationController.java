@@ -24,7 +24,7 @@ public class AuthenticationController {
     
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody CoouserAuthDto authData) {
-        Authentication token = new UsernamePasswordAuthenticationToken(authData.id(), authData.password());
+        Authentication token = new UsernamePasswordAuthenticationToken(authData.email(), authData.password());
         
         authenticationManager.authenticate(token);
         
