@@ -1,8 +1,8 @@
 create table coouser(
 
-    id integer primary key,
+    id integer not null auto_increment primary key,
     name text,
-    email text,
+    email text unique,
     password text
 
 );
@@ -12,6 +12,7 @@ create table service(
     id integer primary key,
     code integer,
     description text 
+ 
 );
 
 create table coouserservice(
