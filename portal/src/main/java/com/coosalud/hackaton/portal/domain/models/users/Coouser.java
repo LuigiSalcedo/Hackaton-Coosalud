@@ -45,7 +45,6 @@ public class Coouser implements UserDetails {
      * @param data record with the data in JSON format.
      */
     public Coouser(CoouserCreatorDto data) {
-        this.id = data.id();
         this.name = data.name();
         this.email = data.email();
         this.password = data.password();
@@ -58,7 +57,12 @@ public class Coouser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return String.valueOf(id);
+        return email;
+    }
+    
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
