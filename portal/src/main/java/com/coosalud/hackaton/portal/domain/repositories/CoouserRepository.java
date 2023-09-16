@@ -9,5 +9,5 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Luigi Salcedo
  */
 public interface CoouserRepository extends JpaRepository<Coouser, Integer>{
-    public UserDetails findUserByEmail();
+    public UserDetails findUserByEmail(String email);
 }

@@ -1,6 +1,8 @@
 package com.coosalud.hackaton.portal.domain.controllers;
 
 import com.coosalud.hackaton.portal.domain.models.users.CoouserAuthDto;
+import com.coosalud.hackaton.portal.infra.services.TokenService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,12 +24,17 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
     
+    @Autowired
+    private TokenService tokenservice;
+    
     @PostMapping
-    public ResponseEntity autenticarUsuario(@RequestBody CoouserAuthDto authData) {
+    public ResponseEntity autenticarUsuario(@RequestBody @Valid CoouserAuthDto authData) {
         Authentication token = new UsernamePasswordAuthenticationToken(authData.email(), authData.password());
         
         authenticationManager.authenticate(token);
         
-        return ResponseEntity.ok().build();
+        String JWTtoken = tokenservice.generateToken();
+        
+        return ResponseEntity.ok(JWTtoken);
     }
 }

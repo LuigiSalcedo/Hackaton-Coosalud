@@ -1,7 +1,5 @@
 package com.coosalud.hackaton.portal.infra.configurations;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +7,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -26,18 +26,17 @@ public class SecurityConfiguration {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and().build();
         } catch (Exception ex) {
-            Logger.getLogger(SecurityConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException(ex.toString());
         }
-        return null;
     }
     
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration ac) {
-        try {
-            return ac.getAuthenticationManager();
-        } catch (Exception ex) {
-            Logger.getLogger(SecurityConfiguration.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration ac) throws Exception {
+        return ac.getAuthenticationManager();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

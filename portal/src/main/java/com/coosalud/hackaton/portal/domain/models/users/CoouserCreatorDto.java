@@ -12,10 +12,6 @@ import jakarta.validation.constraints.Pattern;
  */
 public record CoouserCreatorDto (
         @Valid
-        @NotNull
-        Integer id,
-        
-        @Valid
         @Email
         @NotNull
         String email,
